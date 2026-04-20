@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load view_breadcrumbs %}
+
+{% block title %}{{ object.title }}{% endblock %}
+{% block meta_description %}{{ object.meta_description }}{% endblock %}
+
+{% block og_title %}{{ object.og_title }}{% endblock %}
+{% block og_description %}{{ object.og_description }}{% endblock %}
+
+{% block canonical %}{{ object.get_full_url }}{% endblock %}
+{% block alternate %}{{ object.get_full_url }}{% endblock %}
+{% block alternate_x_default %}{{ object.get_full_url }}{% endblock %}
+
+
+{% block extra_head %}
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "{{ object.title }}",
+            "description": "{{ object.meta_description }}",
+            "image": "{{ object.image.image.url }}",
+            "datePublished": "{{ object.created_at|date:'c' }}",
+            "dateModified": "{{ object.last_modify_time|date:'c' }}",
+            "author": {
+                "@type": "Organization",
+                "name": "Olidetrim"
+            }
+        }
+    </script>
+{% endblock %}
+
+
+{% block indexation %}
+    {% if not article.indexation %}
+        <meta name="robots" content="noindex">
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <img src="{{ object.image.image.url }}" alt="{{ object.image.alt }}" width="100%">
+    <div class="container">
+        {% render_breadcrumbs %}
+        <h1>{{ object.title }}</h1>
+        <div class="row">
+            <div class="col-md-8">
+                <small>{{ object.created_at|timesince }}</small>
+                <p>{{ object.body|safe }}</p>
+            </div>
+            <div class="col-md-4">
+                {% for post in related_posts %}
+                    <a href="{% url 'blog:article_detail' slug=post.slug %}" class="card mb-3"
+                       style="max-width: 540px;">
+                        <div class="row g-0">
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ post.title }}</h5>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <img src="{{ post.image.image.url }}" class="img-fluid rounded-start"
+                                     alt="{{ post.image.alt }}">
+                            </div>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

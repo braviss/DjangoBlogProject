@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "djangoblogproject"
+version = "0.1.0"
+description = ""
+authors = ["braviss <doctype.developer@gmail.com>"]
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.13"
+django = "^6.0.3"
+django-environ = "^0.13.0"
+pillow = "^12.1.1"
+transliterate = "^1.10.2"
+django-modeltranslation = "^0.20.2"
+django-view-breadcrumbs = "^2.5.1"
+django-tinymce = "^5.0.0"
+unidecode = "^1.4.0"
+flake8 = "^7.3.0"
+ruff = "^0.15.10"
+psycopg2-binary = "^2.9.11"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

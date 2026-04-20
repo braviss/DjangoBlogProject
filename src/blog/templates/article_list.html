@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load custom_filters %}
+
+{% block title %}Олідетрим | Блог | Все про вітамін D{% endblock %}
+{% block meta_description %}{% endblock %}
+
+{% block og_title %}{% endblock %}
+{% block og_description %}{% endblock %}
+
+{% block canonical %}{{ request.build_absolute_uri }}{% endblock %}
+{% block alternate %}{{ request.build_absolute_uri }}{% endblock %}
+{% block alternate_x_default %}{{ request.build_absolute_uri }}{% endblock %}
+
+
+{% load view_breadcrumbs %}
+{% block content %}
+    <div class="container">
+
+        {% render_breadcrumbs %}
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {% for article in articles %}
+                <div class="col card mb-3">
+                    <a href="{% url 'blog:article_detail' slug=article.slug %}">
+                        <img src="{{ article.image.image.url }}" class="card-img-top" alt="{{ article.image.alt }}">
+
+                        <div class="card-body">
+                            <h5 class="card-title">{{ article.title }}</h5>
+                            <p>{{ article.body|striptags|truncatewords:10|html_unescape }}</p>
+                            <p class="card-text">
+                                <small class="text-body-secondary">{{ article.created_at|timesince }}</small>
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

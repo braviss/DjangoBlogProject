@@ -1,0 +1,29 @@
+{% load i18n %}
+{% load static %}
+{% get_current_language as lang %}
+<!doctype html>
+<html lang="{{ lang }}">
+<head>
+    <title>{% block title %}Olidetrim{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}{% endblock %}">
+
+    <meta property="og:title" content="{% block og_title %}{% endblock %}"/>
+    <meta property="og:description" content="{% block og_description %}{% endblock %}"/>
+    <link rel="canonical" href="{% block canonical %}{% endblock %}"/>
+    <link rel="alternate" href="{% block alternate %}{% endblock %}" hreflang="{{ lang }}">
+    <link rel="alternate" href="{% block alternate_x_default %}{% endblock %}" hreflang="x-default">
+
+    <link rel="alternate" type="application/rss+xml" title="Blog RSS" href="{% url 'blog:feed' %}">
+
+    {% block indexation %}{% endblock %}
+
+    {% block extra_head %}{% endblock %}
+
+    {% include "includes/head.html" %}
+</head>
+<body>
+{% include "includes/header.html" %}
+{% block content %}{% endblock %}
+{% include "includes/footer.html" %}
+</body>
+</html>

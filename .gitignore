@@ -1,0 +1,32 @@
+# Environment
+.env
+
+# Python
+*.pyc
+*.pyo
+*.egg-info
+__pycache__/
+*.log
+.ruff_cache/
+
+# Django
+db.sqlite3
+media/
+staticfiles/
+*.mo
+
+# Virtual environment
+venv/
+*.virtualenv/
+pyvenv.cfg
+
+# IDE - PyCharm
+.idea/
+.vscode/
+*.iml
+
+# OS files
+.DS_Store
+*.swp
+*~
+Thumbs.db

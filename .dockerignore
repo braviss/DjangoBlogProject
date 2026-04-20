@@ -1,0 +1,23 @@
+# Secrets
+.env
+.env.*
+
+# Git
+.git
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtual env
+venv/
+.venv/
+
+# OS
+.DS_Store
+
+# Local DB files
+db.sqlite3
+
+# Ruff
+.ruff_cache/
