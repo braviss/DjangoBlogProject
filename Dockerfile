@@ -2,17 +2,14 @@ FROM python:3.13
 
 WORKDIR /app
 
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
 
-RUN pip install poetry
+COPY pyproject.toml uv.lock /app/
 
-ENV POETRY_VIRTUALENVS_CREATE=false
-
-COPY pyproject.toml poetry.lock /app/
-RUN poetry install --no-interaction --no-ansi
+RUN uv sync --no-interaction --frozen --no-dev
 
 COPY . /app
 
 RUN chmod +x /app/ops/scripts/start-server.sh
-
 
 CMD ["bash", "/app/ops/scripts/start-server.sh"]

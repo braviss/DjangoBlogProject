@@ -5,6 +5,7 @@
 {% block title %}{{ object.title }}{% endblock %}
 {% block meta_description %}{{ object.meta_description }}{% endblock %}
 
+{% block og_type %}article{% endblock %}
 {% block og_title %}{{ object.og_title }}{% endblock %}
 {% block og_description %}{{ object.og_description }}{% endblock %}
 
@@ -28,6 +29,32 @@
                 "name": "Olidetrim"
             }
         }
+    </script>
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "{% trans 'Home' %}",
+                    "item": "{{ object.get_full_url }}"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "{% trans 'Blog' %}",
+                    "item": "{{ object.get_full_url }}"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "{{ object.title }}",
+                    "item": "{{ object.get_full_url }}"
+            }
+        ]
+    }
     </script>
 {% endblock %}
 
