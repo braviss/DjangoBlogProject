@@ -30,7 +30,7 @@ class BaseModel(models.Model):
         editable=False
     )
     created_at = models.DateTimeField(auto_now_add=True)
-    last_modify_time = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def get_full_url(self):
         domain = Site.objects.get_current().domain
@@ -42,6 +42,7 @@ class BaseModel(models.Model):
 
     class Meta:
         abstract = True
+        ordering = ['-created_at']
 
     @abstractmethod
     def get_absolute_url(self):
@@ -49,6 +50,9 @@ class BaseModel(models.Model):
 
 
 class Tag(models.Model):
+    """
+    Model for storing tag data
+    """
     name = models.CharField(max_length=50, unique=True)
     slug = models.SlugField(max_length=50, unique=True)
 
@@ -125,8 +129,6 @@ class Article(BaseModel):
     )
 
     class Meta:
-        # verbose_name = "Blog"
-        # verbose_name_plural = "Blog"
         verbose_name = _("Blog")
         verbose_name_plural = _("Blog")
         db_table_comment = "Blog table"
@@ -151,8 +153,11 @@ class Article(BaseModel):
 
 
 class Category(BaseModel):
+    """
+    Model for storing category data
+    """
     name = models.CharField(max_length=50, unique=True)
-    slug = models.SlugField(max_length=50, blank=True)
+    slug = models.SlugField(max_length=50, unique=True)
 
     class Meta:
         verbose_name = "Category"
@@ -169,6 +174,9 @@ class Category(BaseModel):
 
 
 class ArticleImage(models.Model):
+    """
+    Model for storing article image data
+    """
     article = models.ForeignKey(
         'Article',
         on_delete=models.CASCADE,

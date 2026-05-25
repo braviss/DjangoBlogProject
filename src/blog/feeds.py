@@ -28,4 +28,4 @@ class LatestArticlesFeed(Feed):
         return item.created_at
 
     def item_updateddate(self, item):
-        return item.last_modify_time
+        return item.updated_at

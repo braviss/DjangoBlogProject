@@ -8,6 +8,8 @@
 {% block og_type %}article{% endblock %}
 {% block og_title %}{{ object.og_title }}{% endblock %}
 {% block og_description %}{{ object.og_description }}{% endblock %}
+{% block og_image %}{{ object.image.image.url }}{% endblock %}
+
 
 {% block canonical %}{{ object.get_full_url }}{% endblock %}
 {% block alternate %}{{ object.get_full_url }}{% endblock %}
@@ -23,38 +25,12 @@
             "description": "{{ object.meta_description }}",
             "image": "{{ object.image.image.url }}",
             "datePublished": "{{ object.created_at|date:'c' }}",
-            "dateModified": "{{ object.last_modify_time|date:'c' }}",
+            "dateModified": "{{ object.updated_at|date:'c' }}",
             "author": {
                 "@type": "Organization",
                 "name": "Olidetrim"
             }
         }
-    </script>
-    <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-                {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "name": "{% trans 'Home' %}",
-                    "item": "{{ object.get_full_url }}"
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "name": "{% trans 'Blog' %}",
-                    "item": "{{ object.get_full_url }}"
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 3,
-                    "name": "{{ object.title }}",
-                    "item": "{{ object.get_full_url }}"
-            }
-        ]
-    }
     </script>
 {% endblock %}
 

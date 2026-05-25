@@ -31,9 +31,9 @@ class TagAdmin(admin.ModelAdmin):
 class ArticleAdmin(TranslationAdmin):
     list_display = ["title", "created_at", "slug", "status"]
     inlines = [ArticleImageInline]
-    # list_filter = ('status', 'created_at')
+    list_filter = ('status', 'created_at')
     ordering = ["-created_at"]
-    exclude = ["last_modify_time"]
+    exclude = ["updated_at"]
     actions = [make_published, raise_article]
     list_editable = ('status',)
     list_display_links = ["title"]
