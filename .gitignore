@@ -30,3 +30,6 @@ pyvenv.cfg
 *.swp
 *~
 Thumbs.db
+
+# New
+.venv/

@@ -5,11 +5,14 @@ services:
     restart: unless-stopped
     volumes:
       - .:/app
+      - /app/.venv
     ports:
       - "8000:8000"
     depends_on:
       db:
         condition: service_healthy
+      redis:
+        condition: service_started
     environment:
       - DATABASE_HOST=db
     env_file:
@@ -33,6 +36,14 @@ services:
       retries: 5
       start_period: 5s
 
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
   pgadmin:
     image: dpage/pgadmin4
     restart: always
@@ -47,3 +58,4 @@ services:
 volumes:
   db_data:
   pgadmin_data:
+  redis_data:
