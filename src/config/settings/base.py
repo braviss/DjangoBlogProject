@@ -167,3 +167,33 @@ BREADCRUMBS_TEMPLATE = "includes/breadcrumbs.html"
 TINYMCE_JS_ROOT = os.path.join(STATIC_URL, "js/tinymce/tinymce.min.js")
 TINYMCE_COMPRESSOR = False
 TINYMCE_API_KEY = env('TINYMCE_API_KEY')
+
+AUTH_USER_MODEL = 'users.CustomUser'
+
+# Django-allauth
+ACCOUNT_FORMS = {
+    'signup': 'src.users.forms.CustomSignupForm',
+}
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+LOGIN_REDIRECT_URL = "/"
+ACCOUNT_USERNAME_BLACKLIST = [
+    "admin",
+    "administrator",
+    "support",
+    "root",
+    "api",
+]
+ACCOUNT_USERNAME_MIN_LENGTH = 4
+ACCOUNT_LOGIN_METHODS = {"username", "email"}
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
+ACCOUNT_SIGNUP_FIELDS = [
+    "username*",
+    "email*",
+    "password1*",
+    "password2*",
+]
