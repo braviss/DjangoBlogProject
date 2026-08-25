@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% endblock %}
+{% block meta_description %}{% endblock %}
+
+{% block og_title %}{% endblock %}
+{% block og_description %}{% endblock %}
+
+{% block canonical %}{{ request.build_absolute_uri }}{% endblock %}
+{% block alternate %}{{ request.build_absolute_uri }}{% endblock %}
+{% block alternate_x_default %}{{ request.build_absolute_uri }}{% endblock %}
+
+
+{% load view_breadcrumbs %}
+{% block content %}
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+                {% render_breadcrumbs %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
