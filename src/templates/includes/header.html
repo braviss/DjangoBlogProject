@@ -30,6 +30,68 @@
                     <a class="nav-link disabled" aria-disabled="true">Disabled</a>
                 </li>
 
+                {% if user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            {{ user.username }}
+                        </a>
+                        <ul class="dropdown-menu">
+                            {% url 'account_email' as email_url_ %}
+                            {% if email_url_ %}
+                                <li><a class="dropdown-item" href="{{ email_url_ }}">{% trans "Change Email" %}</a></li>
+                            {% endif %}
+                            {% url 'account_change_password' as change_password_url_ %}
+                            {% if change_password_url_ %}
+                                <li><a class="dropdown-item"
+                                       href="{{ change_password_url_ }}">{% trans "Change Password" %}</a></li>
+                            {% endif %}
+
+                            {% url 'socialaccount_connections' as connections_url_ %}
+                            {% if connections_url_ %}
+                                <li><a class="dropdown-item"
+                                       href="{{ connections_url_ }}">{% trans "Account Connections" %}</a></li>
+                            {% endif %}
+
+                            {% url 'mfa_index' as mfa_url_ %}
+                            {% if mfa_url_ %}
+                                <li><a class="dropdown-item"
+                                       href="{{ mfa_url_ }}">{% trans "Two-Factor Authentication" %}</a></li>
+                            {% endif %}
+
+
+                            {% url 'usersessions_list' as usersessions_list_url_ %}
+                            {% if usersessions_list_url_ %}
+                                <li><a class="dropdown-item"
+                                       href="{{ usersessions_list_url_ }}">{% trans "Sessions" %}</a></li>
+                            {% endif %}
+
+
+                            {% url 'account_logout' as logout_url_ %}
+                            {% if logout_url_ %}
+                                <li><a class="dropdown-item" href="{{ logout_url_ }}">{% trans "Sign Out" %}</a></li>
+                            {% endif %}
+
+                        </ul>
+                    </li>
+                {% else %}
+                    {% url 'account_login' as login_url_ %}
+                    {% if login_url_ %}
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page"
+                               href="{{ login_url_ }}">{% trans "Sign In" %}</a>
+                        </li>
+                    {% endif %}
+
+                    {% url 'account_signup' as signup_url_ %}
+                    {% if signup_url_ %}
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page"
+                               href="{{ signup_url_ }}">{% trans "Sign Up" %}</a>
+                        </li>
+                    {% endif %}
+                {% endif %}
+
             </ul>
             <nav class="navbar navbar-expand-lg navbar-light bg-light m-2">
                 <form action="{% url 'set_language' %}" method="post" class="form-inline my-2 my-lg-0 ml-auto">
