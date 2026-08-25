@@ -59,6 +59,10 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'django.contrib.sites',
     'django.contrib.redirects',
+    'src.users',
+    'allauth',
+    'allauth.account',
+    'allauth.mfa',
     'tinymce',
     'view_breadcrumbs',
     'src.core',
@@ -75,6 +79,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.redirects.middleware.RedirectFallbackMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'src.config.urls'
